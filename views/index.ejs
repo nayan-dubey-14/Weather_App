@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Weather App</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+      color: #007bff;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+
+    .weather-icon {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body style="background: linear-gradient(to bottom, #87CEEB, #4682B4);">
+<nav class="navbar">
+    <a class="navbar-brand" href="/">Weather App</a>
+</nav>
+
+<div class="container mt-5">
+<form action='/showInfo' method='post' class="d-flex">
+<input type='text' name='city' id='city' class="form-control" placeholder="Enter city name">
+<input type="submit"  value='Search' class="btn btn-primary">
+</form>
+
+<%if(data!=null){%>
+<div class="container mt-5">
+<div class="row">
+<div class="col-md-6 offset-md-3">
+<div class="card">
+<div class="card-body">
+<h2 class="card-title text-center">City Information</h2>
+<div class="form-group">
+<label for="cityName">City Name:</label>
+<p id="cityName"><%=data.name%></p>
+</div>
+<div class="form-group">
+<label for="temperature">Temperature:</label>
+<p id="temperature"><%=data.main.temp%>*c &nbsp;<i class="fas fa-thermometer-half weather-icon"></i></p>
+</div>
+<!-- Wind -->
+<div class="form-group">
+<label for="wind">Wind:</label>
+<p id="wind"><%=data.wind.speed*3.6%>km/h<i class="fas fa-wind weather-icon"></i></p>
+</div>
+<!-- Sunrise -->
+<div class="form-group">
+<label for="sunrise">Sunrise:</label>
+<p id="sunrise"><%= new Date(data.sys.sunrise * 1000).toLocaleTimeString()%><i class="fas fa-sun weather-icon"></i></p>
+</div>
+<!-- Sunset -->
+<div class="form-group">
+<label for="sunset">Sunset:</label>
+<p id="sunset"><%= new Date(data.sys.sunset * 1000).toLocaleTimeString()%><i class="fas fa-moon weather-icon"></i></p>
+</div>
+<!-- Weather -->
+<div class="form-group">
+<label for="weather">Weather:</label>
+<p id="weather"><%=data.weather.main%><i class="fas fa-cloud-sun weather-icon"></i></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<%}%>
+
+
+</div>
+
+<footer  class="fixed-bottom bg-dark text-white p-2 text-center">
+    <div class="container">
+      <p class="mb-0">Made with <i class="bi bi-heart-fill text-danger"></i> by Nayan</strong></p>
+    </div>
+</footer>
+
+</body>
+</html>
+
